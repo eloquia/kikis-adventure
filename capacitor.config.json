@@ -1,0 +1,8 @@
+{
+  "appId": "io.eloquia.kikisscavengerhuntadventure",
+  "appName": "Kiki's Adventure",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}
