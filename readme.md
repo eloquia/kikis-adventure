@@ -14,7 +14,7 @@ It's designed this way because it was just a pet project to understand how Phase
 
 ### Dev Mode
 
-This repo has everything needed to run the game as a 
+This repo has everything needed to run the game as a browser-based game too! After installing dependencies, you can run `npm run start`
 
 ### Prereqs
 
