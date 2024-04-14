@@ -7,10 +7,11 @@ export default class OpeningScene extends Phaser.Scene {
 		super(OPENING_SCENE)
 	}
 
+  isPlaying = false
+
   create() {
     if (IS_DEBUG) console.log('[OPENING SCENE] Preload')
     this.theme = this.sound.add(THEME)
-    this.theme.play({ loop: true })
     this.glissando = this.sound.add(GLISSANDO);
 
     this.cameras.main.fadeIn(1500, 0, 0, 0);
@@ -19,6 +20,19 @@ export default class OpeningScene extends Phaser.Scene {
     backgroundImage.setOrigin(0);
     backgroundImage.displayHeight = WINDOW_HEIGHT;
     backgroundImage.displayWidth = WINDOW_WIDTH;
+    backgroundImage.setInteractive();
+    backgroundImage.on('pointerup', (thing) => {
+      this.simulateTap(thing)
+      console.log('backgroundImage.pointerup', thing)
+      if (!this.isPlaying) {
+        console.log('playing theme')
+        this.theme.play({ loop: true })
+        this.isPlaying = true
+      } else {
+        console.log('theme is already playing')
+      }
+    })
+    backgroundImage.emit('pointerup', 'hello handler')
 
     const title = this.add.text(0, 0, "Kiki's Magical Adventure", { color: OFF_WHITE_TEXT });
     title.setOrigin(0.5, 0.3);
@@ -61,4 +75,19 @@ export default class OpeningScene extends Phaser.Scene {
       this.cameras.main.fadeOut(2000, 0, 0, 0);
     });
   }
+
+  simulateTap(target) {
+    console.log('simulateTap')
+    console.log('pointers', this.input.manager.pointers)
+    for (const p of this.input.manager.pointers) {
+      console.log('p keys', Object.keys(p))
+      for (const key of Object.keys(p)) {
+        console.log('p[' + key + ']', p[key])
+      }
+      this.input.emit('pointerdown', p, 0);
+    }
+    // var p = new Pointer(this.input.manager)
+    // console.log('pointerdown')
+  }
+
 }

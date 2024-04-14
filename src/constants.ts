@@ -201,5 +201,5 @@ export function loadFont(name, url) {
 
 export const IS_DEBUG = false;
 export const DEBUG_SCENE = CLUES_SCENE;
-export const ENVIRONMENT = 'local';
+export const ENVIRONMENT: 'local' | 'aws' | 'gcp' = 'gcp';
 export const DEVICE = 'ios';
